@@ -33,8 +33,24 @@ def assoc_list (l):
 ### Problem  3 ##
 #################
 
-def buckets (f, l):
-    return []
+# main p (removeAll (h::(helper p h t2)) t2) ((h::(helper p h t2))::total) in
+
+def bucketsacc (f, l, acc):
+    if not l:
+        if not acc: return []
+        return acc
+
+    first = l[0]
+    print(l)
+    result=[]
+    for num in l:
+        if f(first,num) or first==num:
+            result.append(num)
+            #print(result)
+            l.remove(num)
+    acc.append(result)
+    return bucketsacc(f, l, acc)
+
 
 
 ###################################
