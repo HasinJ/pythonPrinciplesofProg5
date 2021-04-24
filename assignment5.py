@@ -41,15 +41,17 @@ def bucketsacc (f, l, acc):
         return acc
 
     first = l[0]
-    print(l)
     result=[]
+
     for num in l:
-        if f(first,num) or first==num:
-            result.append(num)
-            #print(result)
-            l.remove(num)
+        if f(first,num): result.append(num)
+
+    for num in result: l.remove(num)
+
     acc.append(result)
     return bucketsacc(f, l, acc)
+
+def buckets(f,l): return bucketsacc(f,l,[])
 
 
 
