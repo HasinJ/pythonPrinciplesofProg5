@@ -10,8 +10,7 @@ import traceback
 
 def closest_to (l, v):
     if not l: return None
-    l=list(set(l))
-    for index in range(len(l)):
+    for index in range(len(sorted(l))):
         if l[index]>v: return l[index] if (l[index]-v)<(v-l[index-1]) else l[index-1]
 
 
@@ -23,7 +22,7 @@ def closest_to (l, v):
 def assoc_list (l):
     if not l: return None
     acc = []
-    for num in list(set(l)): acc.append((num,l.count(num)))
+    for num in sorted(list(set(l))): acc.append((num,l.count(num)))
     return acc
 
 
@@ -37,7 +36,7 @@ def assoc_list (l):
 
 def bucketsacc (f, l, acc):
     if not l:
-        if not acc: return []
+        if not acc: return None
         return acc
 
     first = l[0]
@@ -98,8 +97,15 @@ class TreeNode:
 ### Problem  4 ##
 #################
 
-def level_order(root: TreeNode):
-    return []
+def levelOrderacc(root: TreeNode,level,acc):
+    if not root: return acc
+    if len(acc)<=level: acc.append([])
+    acc[level].append(root.val)
+    level+=1
+    levelOrderacc(root.left,level,acc)
+    return levelOrderacc(root.right,level,acc)
+
+def level_order(root: TreeNode): return levelOrderacc(root,0,[[]])
 
 
 #################
